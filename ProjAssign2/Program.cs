@@ -9,7 +9,7 @@ namespace ProjAssign
     class Program
     {
         static int ans, ansTwo;
-        //static string[] geoPoliticalZone, northCentral, northEast, northWest, southEast, southSouth, southWest;
+        
         static string[] geoPoliticalZone = { "North Central", "North East", "North West", "South East", "South West", "South South" };
 
         static string[] northCentral = { "Benue", "Kogi", "Kwara", "Nasarawa", "Niger", "Plateau", "FCT" };
@@ -69,34 +69,72 @@ namespace ProjAssign
 
         static void Main(string[] args)
         {
-            Console.WriteLine("*******************************************************************************");
-            Console.WriteLine("This is a directory of the states in Nigeria and their local government areas");
-            Console.WriteLine("*******************************************************************************");
+            Console.WriteLine("******************************************************************************************************");
+            Console.WriteLine("This is an APP that gives you the directory of the states in Nigeria and their local government areas");
+            Console.WriteLine("******************************************************************************************************");
 
-            Console.WriteLine("Below is a list of the six(6) geopolitical zones in Nigeria.\nSelect the geopolitical zone your state belongs to.");
-            Console.WriteLine("\n1. North Central\n2. North East\n3. North West\n4. South East\n5. South West\n6. South South");
+            Console.WriteLine("Press enter to begin");
+            Console.ReadLine();
+
+            Console.WriteLine("Nigeria officially the Federal Republic of Nigeria, is a federal republic in West Africa, bordering Niger in the north, Chad in the northeast, Cameroon in the east, and Benin in the west. " +
+                "Its coast in the south is located on the Gulf of Guinea in the Atlantic Ocean. The federation comprises 36 states and 1 Federal Capital Territory, where the capital, Abuja, is located.");
+            Console.ReadLine();
+
+            Console.WriteLine("The Federal Republic of Nigeria is divided into thirty-six states and one Federal Capital Territory, which are further sub-divided into 774 Local Government Areas (LGAs). In some contexts, " +
+                "the states are aggregated into six geopolitical zones.");
+            Console.ReadLine();
+
+            Console.WriteLine("The six geopolitical zones of Nigeria is a major division in modern Nigeria, created during the regime of president General Sani Abacha. " +
+                "Nigeria's economic, political and educational resources are often shared across the zones.");
+            Console.ReadLine();
+
+            Console.WriteLine("The six zones were not entirely carved out based on geographic location, but rather states with similar ethnic groups, and/or common political " +
+                "history were classified in the same zone. Nigeria is made up of approximately 400 ethnic groups and 450 languages. There was a need for the government to merge similar groups for effective allocation of resources.");
+            Console.ReadLine();
+
+            Console.WriteLine("The six geopolitical zones are: \n1. North Central\n2. North East\n3. North West\n4. South East\n5. South West\n6. South South");
+
            
-            Console.WriteLine("\nEnter the number of the Geopolitical zone you want to view information about");
+            Console.WriteLine("\nLike to know more? Enter the number of a Geopolitical zone to view information about it.");
             bool success = int.TryParse(Console.ReadLine(), out ans);
-            Console.WriteLine($"You have selected number {ans}: {geoPoliticalZone[ans - 1]}");
+            Console.WriteLine($"You have selected number {ans}: {geoPoliticalZone[ans - 1]}\n");
+            GeoPoliticalInformation(ans);
+            Console.WriteLine("The North Central is loosely known as Middle Belt. The Middle Belt is a term used in human geography to designate a belt region " +
+                "stretching across central Nigeria longitudinally and forming a transition zone between Northern and Southern Nigeria. It is characterised by " +
+                "its lack of a clear majority ethnic group, and is the location of Nigeria's Federal Capital Territory");
+            Console.ReadLine();
+            Console.WriteLine("The eminence of manifold minority groups, to some degree, constitutes an ethno-linguistic barrier in the country " +
+                "and draws a separation between the principally Islamic North and the mainly Christian south");
+
             Console.WriteLine($"\nFind below a list of the states in the {geoPoliticalZone[ans - 1]} geopolitical zone");
-            
-            if (geoPoliticalZone[ans - 1] == "North Central")
-                GeoPoliticalFunction(northCentral);
-            else if (geoPoliticalZone[ans - 1] == "North East")
-                GeoPoliticalFunction(northEast);
-            else if (geoPoliticalZone[ans - 1] == "North West")
-                GeoPoliticalFunction(northWest);
-            else if (geoPoliticalZone[ans - 1] == "South East")
-                GeoPoliticalFunction(southEast);
-            else if (geoPoliticalZone[ans - 1] == "South West")
-                GeoPoliticalFunction(southWest);
-            else if (geoPoliticalZone[ans - 1] == "South South")
-                GeoPoliticalFunction(southSouth);
-        
+            string[] zone = ans == 1 ? northCentral :
+                            ans == 2 ? northEast :
+                            ans == 3 ? northWest :
+                            ans == 4 ? southEast :
+                            ans == 5 ? southWest : southSouth;
+
+            int i = 1;
+            foreach (string item in zone)
+            {
+                Console.WriteLine(i + ". " + item);
+                i++;
+            }
+
+            Console.WriteLine("Enter the number of the State you want to view information about");
+            bool right = int.TryParse(Console.ReadLine(), out ansTwo);
+
+            Console.WriteLine($"You have selected number {ansTwo}: {zone[ansTwo - 1]} State");
+            Console.WriteLine($"\nFind below a list of the LGA in {zone[ansTwo - 1]} State");
+
+            GeoPolitical(zone);
             Console.ReadLine();
         }
 
+        static string GeoPoliticalInformation(int zoneNumber)
+        {
+
+            return "";
+        }
         static void GeoPoliticalFunction(string[] zone)
         {
             if (zone.Length > 0)
@@ -108,12 +146,12 @@ namespace ProjAssign
                     i++;
                 }
             }
+            GeoPolitical(zone);
+        }
 
-            Console.WriteLine("Enter the number of the State you want to view information about");
-            bool right = int.TryParse(Console.ReadLine(), out ansTwo);
-            Console.WriteLine($"You have selected number {ansTwo}: {zone[ansTwo - 1]} State");
-            Console.WriteLine($"\nFind below a list of the LGA in {zone[ansTwo - 1]} State");
 
+        static void GeoPolitical(string[] zone)
+        {
             if (zone[ansTwo - 1] == "Benue")
                 StateFunction(benue);
             else if (zone[ansTwo - 1] == "Kogi")
@@ -188,9 +226,10 @@ namespace ProjAssign
                 StateFunction(osun);
             else if (zone[ansTwo - 1] == "Oyo")
                 StateFunction(oyo);
-                 
-           return;
+
+            return;
         }
+            
 
          static void StateFunction(string[] state)
         {
